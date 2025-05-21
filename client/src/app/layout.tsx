@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -10,9 +11,9 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "Sujo Verse – Explore Creativity, Code & Community",
-  description: "Sujo Verse is a dynamic platform where innovation meets creativity. Discover tools, stories, and resources crafted for developers, creators, and dreamers alike.",
+  description:
+    "Sujo Verse is a dynamic platform where innovation meets creativity. Discover tools, stories, and resources crafted for developers, creators, and dreamers alike.",
 };
-
 
 export default function RootLayout({
   children,
@@ -21,10 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${dmSans.className}`}
-      >
-        {children}
+      <body className={dmSans.className}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
