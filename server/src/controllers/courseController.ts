@@ -30,3 +30,5 @@ export const getCourse = async(req:Request,res:Response):Promise<void>=>{
    res.status(500).json({ message: "Error retrieving course", error });
  }
 }
+
+
