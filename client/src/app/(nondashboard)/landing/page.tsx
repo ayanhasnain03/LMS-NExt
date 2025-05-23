@@ -9,8 +9,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useGetCoursesQuery } from "@/state/api";
 import { useRouter } from "next/navigation";
 import CourseCardSearch from "@/components/CourseCardSearch";
+// import { useUser } from "@clerk/nextjs";
 
 const LoadingSkeleton = () => {
+ // const {user} = useUser();
+ // const router = useRouter()
   return (
     <div className="landing-skeleton">
       <div className="landing-skeleton__hero">
@@ -47,7 +50,7 @@ const Landing = () => {
   const router = useRouter();
   const currentImage = useCarousel({ totalImages: 3 });
   const { data: courses, isLoading, isError } = useGetCoursesQuery({});
-console.log(courses)
+
   const handleCourseClick = (courseId: string) => {
     router.push(`/search?id=${courseId}`, {
       scroll: false,
