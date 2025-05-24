@@ -25,6 +25,9 @@ export const Switch = React.forwardRef<
       "relative inline-flex h-7 w-12 cursor-pointer items-center rounded-full transition-colors",
       "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+      // Track border
+      "border-2 border-gray-300",
+      // Track colors
       "data-[state=unchecked]:bg-customgreys-secondarybg",
       "data-[state=checked]:bg-primary-700",
       className
@@ -33,6 +36,9 @@ export const Switch = React.forwardRef<
     <SwitchPrimitives.Thumb
       className={cn(
         "flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md transition-transform",
+        // Thumb border
+        "",
+        // Slide distance = track width(12) - thumb width(6)
         "data-[state=unchecked]:translate-x-0",
         "data-[state=checked]:translate-x-5"
       )}
