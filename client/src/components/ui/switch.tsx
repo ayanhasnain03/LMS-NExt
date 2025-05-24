@@ -1,33 +1,48 @@
+// components/ui/Switch.tsx
 "use client";
 
 import * as React from "react";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
+import { Check, X } from "lucide-react";  // install via `npm install lucide-react`
 import { cn } from "@/lib/utils";
 
-const Switch = React.forwardRef<
+export interface SwitchProps extends React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root> {
+  ariaLabelOn?: string;
+  ariaLabelOff?: string;
+}
+
+export const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
-  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
->(({ className, ...props }, ref) => (
+  SwitchProps
+>(({ className, ariaLabelOn = "On", ariaLabelOff = "Off", ...props }, ref) => (
   <SwitchPrimitives.Root
+    {...props}
     ref={ref}
+    role="switch"
+    aria-checked={!!props.checked}
+    aria-label={props.checked ? ariaLabelOn : ariaLabelOff}
     className={cn(
-      "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors",
-      "bg-gray-300 data-[state=checked]:bg-emerald-500 dark:bg-gray-600 dark:data-[state=checked]:bg-emerald-400",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-      "disabled:cursor-not-allowed disabled:opacity-50",
+      "relative inline-flex h-7 w-12 cursor-pointer items-center rounded-full transition-colors",
+      "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+      "data-[state=unchecked]:bg-customgreys-secondarybg",
+      "data-[state=checked]:bg-primary-700",
       className
     )}
-    {...props}
   >
     <SwitchPrimitives.Thumb
       className={cn(
-        "pointer-events-none block h-5 w-5 rounded-full bg-white shadow-md ring-0 transition-transform",
-        "translate-x-0.5 data-[state=checked]:translate-x-5"
+        "flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md transition-transform",
+        "data-[state=unchecked]:translate-x-0",
+        "data-[state=checked]:translate-x-5"
       )}
-    />
+    >
+      {props.checked ? (
+        <Check className="h-4 w-4 text-green-400" />
+      ) : (
+        <X className="h-4 w-4 text-red-800" />
+      )}
+    </SwitchPrimitives.Thumb>
   </SwitchPrimitives.Root>
 ));
-
-Switch.displayName = "Switch";
-
-export { Switch };
+Switch.displayName = SwitchPrimitives.Root.displayName;
